@@ -14,7 +14,7 @@ SystemRequirements: Python (>= 3.9), zvec Python package
 Imports:
     rzvec
 Remotes:
-    bartek-szabat/play-zvec/rzvec
+    keneo/play-zvec/rzvec
 Suggests:
     testthat (>= 3.0.0),
     withr
