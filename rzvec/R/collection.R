@@ -21,7 +21,7 @@ create_collection <- function(path, schema, option = NULL) {
 #' @return A Python collection object.
 #' @export
 open_collection <- function(path, option = NULL) {
-  .zv()$open(path = path, option = option)
+  if (is.null(option)) .zv()$open(path) else .zv()$open(path, option)
 }
 
 #' Insert documents into a collection

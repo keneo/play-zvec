@@ -48,11 +48,11 @@ invert_index_param <- function(...) {
 #' @return The result of the create_index call (invisibly).
 #' @export
 col_create_index <- function(col, field_name, index_param, option = NULL) {
-  invisible(col$create_index(
-    field_name = field_name,
-    index_param = index_param,
-    option = option
-  ))
+  if (is.null(option)) {
+    invisible(col$create_index(field_name, index_param))
+  } else {
+    invisible(col$create_index(field_name, index_param, option))
+  }
 }
 
 #' Drop an index from a collection field
@@ -76,5 +76,5 @@ col_drop_index <- function(col, field_name) {
 #' @return The result of the optimize call (invisibly).
 #' @export
 col_optimize <- function(col, option = NULL) {
-  invisible(col$optimize(option = option))
+  if (is.null(option)) invisible(col$optimize()) else invisible(col$optimize(option))
 }
