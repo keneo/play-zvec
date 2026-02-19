@@ -10,7 +10,7 @@ Description: A minimal, R-native interface to the zvec vector database.
     plain R data frames.
 License: MIT + file LICENSE
 Encoding: UTF-8
-SystemRequirements: Python (>= 3.9), zvec Python package
+SystemRequirements: Python (>= 3.10), zvec Python package
 Imports:
     rzvec
 Remotes:

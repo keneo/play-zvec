@@ -7,7 +7,7 @@ Description: Provides idiomatic R wrappers around the Python 'zvec' vector datab
     vector similarity search, and index management.
 License: MIT + file LICENSE
 Encoding: UTF-8
-SystemRequirements: Python (>= 3.9), zvec Python package
+SystemRequirements: Python (>= 3.10), zvec Python package
 Imports:
     reticulate
 Suggests:
