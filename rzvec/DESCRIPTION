@@ -1,7 +1,7 @@
 Package: rzvec
 Title: R Bindings for the zvec Vector Database
 Version: 0.1.0
-Authors@R: person("Bartek", "Szabat", role = c("aut", "cre"), email = "bartek.szabat@gmail.com")
+Authors@R: person("Bartek", "Szabat", role = c("aut", "cre"))
 Description: Provides idiomatic R wrappers around the Python 'zvec' vector database
     library via 'reticulate'. Supports collection management, document CRUD,
     vector similarity search, and index management.

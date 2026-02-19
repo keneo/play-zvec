@@ -1,8 +1,7 @@
 Package: rszvec
 Title: Simple R Interface to the zvec Vector Database
 Version: 0.1.0
-Authors@R: person("Bartek", "Szabat", role = c("aut", "cre"),
-    email = "bartek.szabat@gmail.com")
+Authors@R: person("Bartek", "Szabat", role = c("aut", "cre"))
 Description: A minimal, R-native interface to the zvec vector database.
     Wraps 'rzvec' with five functions covering the core workflow: open a
     collection, add vectors (one at a time or in bulk from a matrix), search
