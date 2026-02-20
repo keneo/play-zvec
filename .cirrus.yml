@@ -7,6 +7,7 @@ task:
 
   env:
     RENV_CONFIG_ACTIVE: "FALSE"
+    GITHUB_PAT: $CIRRUS_REPO_CLONE_TOKEN
 
   cpu_info_script: grep -m1 "model name" /proc/cpuinfo
 
