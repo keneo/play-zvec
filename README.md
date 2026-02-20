@@ -75,6 +75,13 @@ Determined by the `zvec` Python package, which ships binary wheels for:
 
 Python 3.10, 3.11, and 3.12 are supported. Python 3.9 and earlier are not.
 
+On Linux, the following system packages must be installed before calling
+`rszvec_install()` / `rzvec_install()`:
+
+```bash
+sudo apt install python3-venv python3-dev python3-pip
+```
+
 ## License
 
 MIT
