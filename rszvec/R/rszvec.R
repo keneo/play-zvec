@@ -53,14 +53,19 @@ rszvec_add <- function(col, id, vector) {
 #'
 #' @return `col`, invisibly.
 #' @export
-rszvec_add_many <- function(col, ids, vectors) {
+rszvec_add_many <- function(col, ids, vectors, batch_size = 1000L) {
   if (is.matrix(vectors)) {
     vectors <- lapply(seq_len(nrow(vectors)), function(i) vectors[i, ])
   }
-  docs <- lapply(seq_along(ids), function(i) {
-    rzvec::zvec_doc(ids[[i]], vectors = list(vec = vectors[[i]]))
-  })
-  do.call(rzvec::col_insert, c(list(col), docs))
+  n <- length(ids)
+  starts <- seq(1L, n, by = batch_size)
+  for (s in starts) {
+    idx <- seq(s, min(s + batch_size - 1L, n))
+    docs <- lapply(idx, function(i) {
+      rzvec::zvec_doc(ids[[i]], vectors = list(vec = vectors[[i]]))
+    })
+    do.call(rzvec::col_insert, c(list(col), docs))
+  }
   invisible(col)
 }
 
