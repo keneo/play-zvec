@@ -13,6 +13,14 @@ remotes::install_github("keneo/play-zvec/rszvec")
 
 ### Python setup (one-time)
 
+On Linux, install these system packages first:
+
+```bash
+sudo apt install python3-venv python3-dev python3-pip
+```
+
+Then:
+
 ```r
 library(rszvec)
 rszvec_install()   # creates a virtualenv and installs the zvec Python package
