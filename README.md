@@ -3,24 +3,15 @@
 R bindings for the [zvec](https://pypi.org/project/zvec/) vector database at
 three levels of abstraction.
 
-| Package | Who it's for | What you get |
-|---|---|---|
-| [`rzvec`](rzvec/) | R developers who want the full zvec API | Thin, idiomatic R wrappers over every zvec Python class and method |
-| [`rszvec`](rszvec/) | R developers who want minimal ceremony | 5-function API; results come back as plain `data.frame`s |
-
-Raw Python access via `reticulate` is also demonstrated in
-[`play-zvec-example.R`](play-zvec-example.R).
-
 ## Quick start
 
 ### rszvec — simplest path
 
 ```r
-# install.packages("remotes")
 remotes::install_github("keneo/play-zvec/rszvec")
 
 library(rszvec)
-rszvec_install()   # one-time: creates a Python virtualenv and installs zvec
+rszvec_install()   # one-time
 
 col <- rszvec_open("/tmp/my_collection", dim = 4)
 
@@ -39,7 +30,7 @@ rszvec_search(col, c(0.4, 0.3, 0.3, 0.1), n = 5)
 remotes::install_github("keneo/play-zvec/rzvec")
 
 library(rzvec)
-rzvec_install()   # one-time setup
+rzvec_install()   # one-time
 
 schema <- collection_schema(
   "my_docs",
@@ -63,6 +54,16 @@ col_query(col, vector_query("embedding", vector = c(0.4, 0.3, 0.3, 0.1)), topk =
 | [`play-rzvec-example.R`](play-rzvec-example.R) | `rzvec` R package |
 | [`play-rszvec-example.R`](play-rszvec-example.R) | `rszvec` R package |
 
+## Contents
+
+| Package | Who it's for | What you get |
+|---|---|---|
+| [`rzvec`](rzvec/) | R developers who want the full zvec API | Thin, idiomatic R wrappers over every zvec Python class and method |
+| [`rszvec`](rszvec/) | R developers who want minimal ceremony | 5-function API; results come back as plain `data.frame`s |
+
+Raw Python access via `reticulate` is also demonstrated in
+[`play-zvec-example.R`](play-zvec-example.R).
+
 ## Platform support
 
 Determined by the `zvec` Python package, which ships binary wheels for:
@@ -75,9 +76,14 @@ Determined by the `zvec` Python package, which ships binary wheels for:
 
 Python 3.10, 3.11, and 3.12 are supported. Python 3.9 and earlier are not.
 
-The Linux x86_64 wheel is compiled by Alibaba with Intel-specific instructions and
+## Known issues
+
+The Linux x86_64 wheel is currently compiled by Alibaba with Intel-specific instructions and
 requires AVX-512 support. It will crash with SIGILL on AMD processors and older
-Intel CPUs. ARM64 Linux has no such restriction.
+Intel CPUs. See issue https://github.com/alibaba/zvec/issues/128 and fix 
+https://github.com/alibaba/zvec/pull/137
+
+ARM64 Linux has no such restriction.
 
 On Linux, the following system packages must be installed before calling
 `rszvec_install()` / `rzvec_install()`:

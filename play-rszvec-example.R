@@ -1,7 +1,5 @@
-library(reticulate)
-use_virtualenv(file.path(getwd(), "rzvec-venv"), required = TRUE)
-
 library(rszvec)
+rszvec_install()
 
 col <- rszvec_open("/tmp/rszvec_example", dim = 4)
 
