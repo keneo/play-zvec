@@ -12,6 +12,7 @@ jobs:
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      RENV_CONFIG_ACTIVE: "FALSE"   # prevent renv from hijacking the session
 
     steps:
       - uses: actions/checkout@v4
@@ -26,11 +27,11 @@ jobs:
 
       - name: Install R packages
         run: |
-          Rscript --no-init-file -e "
-            install.packages('remotes', repos='https://cloud.r-project.org')
+          Rscript -e "
+            install.packages('remotes')
             remotes::install_github('keneo/play-zvec/rzvec')
             remotes::install_github('keneo/play-zvec/rszvec')
           "
 
       - name: Run end-to-end test
-        run: Rscript --no-init-file docker/ci-test.R
+        run: Rscript docker/ci-test.R
