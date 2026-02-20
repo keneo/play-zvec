@@ -3,7 +3,7 @@ task:
   container:
     image: rocker/r-ver:4.4
     cpu: 2
-    memory: 4G
+    memory: 8G
 
   env:
     RENV_CONFIG_ACTIVE: "FALSE"
