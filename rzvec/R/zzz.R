@@ -28,8 +28,11 @@ rzvec_install <- function(envname = "rzvec-venv", ...) {
 
   if (.linux_x86_without_avx512()) {
     message(
-      "AVX-512 not detected on this x86_64 Linux system.\n",
-      "Building zvec from source (this takes a few minutes).\n",
+      "WARNING: AVX-512 is not available on this system. The pre-built zvec\n",
+      "wheel requires AVX-512 and would crash at runtime (see known bug:\n",
+      "https://github.com/alibaba/zvec/issues/128).\n",
+      "\n",
+      "Falling back to building zvec from source. This may take several minutes.\n",
       "Requires: git, cmake, ninja-build, g++"
     )
     .install_zvec_from_source(venv_dir)
@@ -41,6 +44,8 @@ rzvec_install <- function(envname = "rzvec-venv", ...) {
   invisible(NULL)
 }
 
+# TODO: remove this workaround once https://github.com/alibaba/zvec/issues/128
+# is fixed and zvec ships a wheel compiled without AVX-512 assumptions.
 .linux_x86_without_avx512 <- function() {
   si <- Sys.info()
   if (si[["sysname"]] != "Linux" || si[["machine"]] != "x86_64") return(FALSE)
