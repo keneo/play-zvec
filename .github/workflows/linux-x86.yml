@@ -25,3 +25,5 @@ jobs:
 
       - name: Run end-to-end test
         run: Rscript --no-init-file docker/test.R
+        env:
+          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
