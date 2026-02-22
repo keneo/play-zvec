@@ -51,9 +51,14 @@ zvec_tempdir <- function(env = parent.frame()) {
 }
 
 # Create a fresh rszvec collection in a self-cleaning temp directory.
+# withr::defer runs in LIFO order, so col$destroy() (registered second)
+# executes before unlink() (registered first inside zvec_tempdir),
+# ensuring RocksDB handles are closed before the directory is removed.
 new_temp_col <- function(dim = 4L, env = parent.frame()) {
   dir <- zvec_tempdir(env = env)
-  rszvec_open(dir, dim = dim)
+  col <- rszvec_open(dir, dim = dim)
+  withr::defer(try(col$destroy(), silent = TRUE), envir = env)
+  col
 }
 
 # Four orthogonal unit vectors useful for dot-product ordering tests.

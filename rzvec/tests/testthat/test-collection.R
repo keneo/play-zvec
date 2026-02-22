@@ -4,6 +4,7 @@ test_that("create_collection() creates directory on disk", {
   schema <- collection_schema("test_col",
     vectors = vector_schema("emb", zvec_data_type()$VECTOR_FP32, 4L))
   col <- create_collection(dir, schema)
+  withr::defer(try(col$destroy(), silent = TRUE))
   expect_s3_class(col, "python.builtin.object")
   expect_true(dir.exists(dir))
 })
@@ -14,12 +15,14 @@ test_that("open_collection() reopens an existing collection", {
   schema <- collection_schema("reopen_col",
     vectors = vector_schema("emb", zvec_data_type()$VECTOR_FP32, 4L))
   col1 <- create_collection(dir, schema)
+  col_flush(col1)
   # Release the write lock before reopening: drop the R reference and run
   # both the R and Python garbage collectors.
   rm(col1); gc()
   reticulate::py_run_string("import gc; gc.collect()")
 
   col2 <- open_collection(dir)
+  withr::defer(try(col2$destroy(), silent = TRUE))
   expect_s3_class(col2, "python.builtin.object")
 })
 

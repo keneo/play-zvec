@@ -58,13 +58,18 @@ zvec_tempdir <- function(env = parent.frame()) {
 
 # Create a fresh collection in a self-cleaning temp directory.
 # Cleanup is deferred to the calling test's environment via withr.
+# withr::defer runs in LIFO order, so col$destroy() (registered second)
+# executes before unlink() (registered first inside zvec_tempdir),
+# ensuring RocksDB handles are closed before the directory is removed.
 new_temp_col <- function(name = "test_col", dim = 4L, env = parent.frame()) {
   dir <- zvec_tempdir(env = env)
   schema <- collection_schema(
     name,
     vectors = vector_schema("emb", zvec_data_type()$VECTOR_FP32, dim)
   )
-  create_collection(dir, schema)
+  col <- create_collection(dir, schema)
+  withr::defer(try(col$destroy(), silent = TRUE), envir = env)
+  col
 }
 
 # Four orthogonal unit vectors useful for dot-product ordering tests.

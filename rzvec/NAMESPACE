@@ -2,6 +2,7 @@
 
 export(col_create_index)
 export(col_delete)
+export(col_destroy)
 export(col_delete_by_filter)
 export(col_drop_index)
 export(col_fetch)

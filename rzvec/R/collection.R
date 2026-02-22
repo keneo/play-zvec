@@ -117,6 +117,20 @@ col_query <- function(col, vectors = NULL, topk = 10L, filter = NULL,
   )
 }
 
+#' Destroy a collection
+#'
+#' Closes all internal handles (RocksDB, etc.) and deletes the on-disk storage.
+#' Call this before removing the collection directory to avoid spurious
+#' RocksDB flush errors during garbage collection.
+#'
+#' @param col A collection object.
+#'
+#' @return Invisibly `NULL`.
+#' @export
+col_destroy <- function(col) {
+  invisible(col$destroy())
+}
+
 #' Flush a collection to disk
 #'
 #' @param col A collection object.

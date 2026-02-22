@@ -28,6 +28,7 @@ test_that("col_create_index() and col_drop_index() run without error", {
   schema <- collection_schema("index_test_col",
     vectors = vector_schema("emb", zvec_data_type()$VECTOR_FP32, 4L))
   col <- create_collection(dir, schema)
+  withr::defer(try(col$destroy(), silent = TRUE))
   col_insert(col,
     zvec_doc("i1", vectors = list(emb = c(1, 0, 0, 0))),
     zvec_doc("i2", vectors = list(emb = c(0, 1, 0, 0)))
