@@ -51,7 +51,8 @@ skip_if_no_zvec <- function() {
 # the target path to be absent and creates it itself.
 zvec_tempdir <- function(env = parent.frame()) {
   uid <- paste(sample(c(letters, 0:9), 10, replace = TRUE), collapse = "")
-  dir <- file.path("/tmp", paste0("zvec_", uid))
+  base <- if (Sys.info()[["sysname"]] == "Darwin") "/tmp" else tempdir()
+  dir <- file.path(base, paste0("zvec_", uid))
   withr::defer(unlink(dir, recursive = TRUE), envir = env)
   dir
 }

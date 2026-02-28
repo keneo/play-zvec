@@ -11,6 +11,7 @@ SystemRequirements: Python (>= 3.10), zvec Python package
 Imports:
     reticulate
 Suggests:
+    rprojroot,
     testthat (>= 3.0.0),
     withr
 Config/testthat/edition: 3
