@@ -1,10 +1,13 @@
 Package: rzvec
-Title: R Bindings for the zvec Vector Database
-Version: 0.1.0
+Title: R Bindings for the 'zvec' Vector Database
+Version: 0.1.1
 Authors@R: person("Bartek", "Szabat", role = c("aut", "cre"), email = "keneo@szabat.com")
-Description: Provides idiomatic R wrappers around the Python 'zvec' vector database
-    library via 'reticulate'. Supports collection management, document CRUD,
-    vector similarity search, and index management.
+Description: Provides idiomatic R wrappers around the 'Python' 'zvec' vector
+    database library via 'reticulate'. Supports collection management,
+    document insert, update, upsert, delete, fetch (CRUD,
+    create/read/update/delete), vector similarity search, and index
+    management. See <https://github.com/agentica-project/zvec> for details
+    about the 'zvec' engine.
 License: MIT + file LICENSE
 Encoding: UTF-8
 SystemRequirements: Python (>= 3.10), zvec Python package

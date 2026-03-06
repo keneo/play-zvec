@@ -2,7 +2,10 @@
 
 0 errors | 0 warnings | 1 note
 
-* This is the first submission.
+* This is a resubmission. Changes from initial submission:
+  - Single-quoted software names in Title and Description.
+  - Expanded CRUD acronym in Description.
+  - Added reference URL for 'zvec' in Description.
 
 ## Notes
 
